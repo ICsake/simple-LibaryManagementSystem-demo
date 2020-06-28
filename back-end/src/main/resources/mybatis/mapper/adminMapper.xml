@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lmsourassf.librarymanagementsystem.mapper.AdminMapper">
+
+    <select id="Login" parameterType="map" resultMap="AdminMap">
+        select * from admin where admin_name = #{admin_name} and admin_pwd = #{admin_pwd}
+    </select>
+
+    <resultMap id="AdminMap" type="Admin">
+        <id column="admin_id" property="id"/>
+        <result column="admin_name" property="name"/>
+        <result column="admin_pwd" property="pwd"/>
+        <result column="admin_phone" property="phone"/>
+        <result column="admin_email" property="email"/>
+    </resultMap>
+</mapper>

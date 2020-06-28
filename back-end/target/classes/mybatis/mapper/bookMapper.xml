@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lmsourassf.librarymanagementsystem.mapper.BookMapper">
+    <select id="queryBookList" resultMap="BookMap">
+        select * from book
+    </select>
+
+    <resultMap id="BookMap" type="Book">
+        <!--
+        一般通过id标签来映射主键
+        column = 数据库的列名
+        property = 结果集对应的数据库列名的映射名
+        -->
+        <id column="book_id" property="id"/>
+        <result column="book_name" property="name"/>
+        <result column="book_author" property="author"/>
+        <result column="book_publish" property="publish"/>
+        <result column="book_category" property="category"/>
+        <result column="book_price" property="price"/>
+
+    </resultMap>
+
+
+    <select id="queryBookById" resultMap="BookMap">
+        select * from book where book_id = #{id}
+    </select>
+
+    <insert id="addBook" parameterType="Book" useGeneratedKeys="true" keyProperty="id">
+        insert into book(book_name,book_author,book_publish,book_category,book_price) values(#{name},#{author},#{publish},#{category},#{price})
+    </insert>
+    
+    <update id="updateBook" parameterType="Book">
+        update book set book_name=#{name},book_author=#{author},book_publish=#{publish},book_category=#{category},book_price=#{price} where book_id = #{id}
+    </update>
+
+    <delete id="deleteBook" parameterType="int">
+        delete from book where book_id = #{id}
+    </delete>
+
+    <select id="countBook" resultType="int">
+        select count(*) from book
+    </select>
+</mapper>

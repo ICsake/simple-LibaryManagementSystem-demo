@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lmsourassf.librarymanagementsystem.mapper.BorrowMapper">
+    <insert id="borrowBook" parameterType="BorrowBooks" useGeneratedKeys="true" keyProperty="id">
+        insert into borrowbook(user_id,user_name,book_id,book_name,borrow_date,due_date) values(#{user_id},#{user_name},#{book_id},#{book_name},#{borrow_date},#{due_date})
+    </insert>
+
+    <select id="borrowList" resultType="BorrowBooks">
+        select * from borrowbook
+    </select>
+
+    <delete id="returnBook" parameterType="map">
+        delete from borrowbook where user_id = #{user_id} and book_id = #{book_id}
+    </delete>
+</mapper>
